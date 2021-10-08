@@ -3,16 +3,19 @@ const app = express();
 const cors = require('cors');
 const cookiesMiddleware = require('universal-cookie-express');
 const usersRouter = require("./users/users.router");
-
+const imagesRouter = require("./images/images.router");
+const gamesRouter = require("./games/games.router");
 app.use(express.json());
 app.use(cors());
 app.use(cookiesMiddleware())
 
 app.use("/users", usersRouter);
-
+app.use("/images", imagesRouter);
+app.use("/games", gamesRouter);
 app.use((req, res, next) => {
   next({ status: 404, message: `Not found: ${req.originalUrl}` });
 });
+
 
 app.use((error, req, res, next) => {
   console.error(error);
